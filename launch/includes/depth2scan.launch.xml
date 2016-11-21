@@ -1,0 +1,25 @@
+<launch>
+    <arg name="machine"/>
+    <arg name="manager"/>
+    <arg name="depth2scan_config" default="$(find vision)/params/depth2scan.yaml"/>
+    <arg name="respawn" default="false"/>
+    <arg if="$(arg respawn)" name="bond" value=""/>
+    <arg unless="$(arg respawn)" name="bond" value="--no-bond"/>
+
+    <!--<node pkg="nodelet" type="nodelet" machine="$(arg machine)" name="depth2scan_thottle"-->
+          <!--args="load vision/NodeletThrottleImage $(arg manager) $(arg bond)"-->
+          <!--respawn="$(arg respawn)">-->
+        <!--<param name="update_rate" value="12"/>-->
+        <!--<remap from="topic_in" to="depth/image"/>-->
+        <!--<remap from="topic_out" to="depth/image_throttled"/>-->
+    <!--</node>-->
+
+    <node pkg="nodelet" type="nodelet" machine="$(arg machine)" name="depth2scan"
+          args="load depthimage_to_laserscan/DepthImageToLaserScanNodelet $(arg manager) $(arg bond)"
+          respawn="$(arg respawn)">
+        <rosparam file="$(arg depth2scan_config)" command="load"/>
+        <remap from="scan" to="scan"/>
+        <remap from="image" to="depth/image"/>
+    </node>
+
+</launch>

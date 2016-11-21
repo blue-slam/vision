@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+
+<launch>
+    <include file="$(find platform)/launch/includes/machines.launch.xml"/>
+    <arg name="machine"/>
+    <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="camera_scan" machine="$(arg machine)" respawn="true" output="screen">
+        <rosparam file="$(find vision)/params/depth2scan.yaml" command="load"/>
+        <remap from="scan" to="camera/scan"/>
+        <remap from="image" to="camera/depth/image"/>
+    </node>
+</launch>

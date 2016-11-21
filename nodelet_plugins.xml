@@ -1,0 +1,7 @@
+<library path="lib/libvision">
+    <class name="vision/NodeletThrottleImage" type="vision::NodeletThrottleImage" base_class_type="nodelet::Nodelet">
+        <description>
+            Image Throttle nodelet.
+        </description>
+    </class>
+</library>

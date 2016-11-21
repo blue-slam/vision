@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+
+<launch>
+    <arg name="machine"/>
+
+    <include file="$(find vision)/launch/r200_nodelet_rgbd.launch">
+        <arg name="machine" value="$(arg machine)"/>
+    </include>
+
+</launch>
